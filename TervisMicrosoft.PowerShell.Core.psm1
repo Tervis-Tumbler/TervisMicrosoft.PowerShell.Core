@@ -5,3 +5,10 @@
 
     $Command.EndExecutionTime - $Command.StartExecutionTime
 }
+
+function Get-ModulePath {
+    param (
+        [Parameter(Mandatory)]$Name
+    )
+    (Get-Module -ListAvailable $Name).ModuleBase
+}
