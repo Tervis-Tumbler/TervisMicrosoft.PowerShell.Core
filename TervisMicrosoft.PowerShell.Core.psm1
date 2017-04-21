@@ -12,3 +12,10 @@ function Get-ModulePath {
     )
     (Get-Module -ListAvailable $Name).ModuleBase
 }
+
+function Set-LocationModulePath {
+    param (
+        [Parameter(Mandatory)]$Name
+    )
+    Set-Location -Path (Get-ModulePath -Name $Name)
+}
