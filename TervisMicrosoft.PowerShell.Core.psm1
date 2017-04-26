@@ -25,8 +25,10 @@ function Add-IPAddressToWSManTrustedHosts {
     param (
         [parameter(Mandatory, ValueFromPipelineByPropertyName)][string]$IPAddress
     )
-    Write-Verbose "Adding $IPAddress to WSMan Trusted Hosts"
-    Set-Item -Path WSMan:\localhost\Client\TrustedHosts -Value $IPAddress -Force
+    process {
+        Write-Verbose "Adding $IPAddress to WSMan Trusted Hosts"
+        Set-Item -Path WSMan:\localhost\Client\TrustedHosts -Value $IPAddress -Force
+    }
 }
 
 function Get-WSManTrustedHosts {
