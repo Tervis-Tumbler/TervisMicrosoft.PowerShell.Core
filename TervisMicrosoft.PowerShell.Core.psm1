@@ -27,7 +27,7 @@ function Add-IPAddressToWSManTrustedHosts {
     )
     process {
         Write-Verbose "Adding $IPAddress to WSMan Trusted Hosts"
-        Set-Item -Path WSMan:\localhost\Client\TrustedHosts -Value $IPAddress -Force
+        Set-Item -Path WSMan:\localhost\Client\TrustedHosts -Value $IPAddress -Force -Concatenate
     }
 }
 
