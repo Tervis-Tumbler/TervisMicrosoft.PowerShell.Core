@@ -34,3 +34,13 @@ function Add-IPAddressToWSManTrustedHosts {
 function Get-WSManTrustedHosts {
     Get-Item -Path WSMan:\localhost\Client\TrustedHosts
 }
+
+function Get-PropertyNames {
+    param (
+        [Parameter(Mandatory,ValueFromPipeline)]$Object
+    )
+    $Object |
+    Get-Member |
+    Where MemeberType -In "Property","NoteProperty" |
+    Select-Object -ExpandProperty Name
+}
