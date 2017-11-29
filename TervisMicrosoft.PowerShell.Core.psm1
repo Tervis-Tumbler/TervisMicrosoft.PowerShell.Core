@@ -35,12 +35,14 @@ function Get-WSManTrustedHosts {
     Get-Item -Path WSMan:\localhost\Client\TrustedHosts
 }
 
-function Get-PropertyNames {
+function Get-PropertyName {
     param (
         [Parameter(Mandatory,ValueFromPipeline)]$Object
     )
-    $Object |
-    Get-Member |
-    Where MemeberType -In "Property","NoteProperty" |
-    Select-Object -ExpandProperty Name
+    process {
+        $Object |
+        Get-Member |
+        Where MemberType -In "Property","NoteProperty" |
+        Select-Object -ExpandProperty Name
+    }
 }
