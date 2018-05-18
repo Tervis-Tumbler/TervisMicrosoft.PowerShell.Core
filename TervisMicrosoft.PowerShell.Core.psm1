@@ -46,3 +46,18 @@ function Get-PropertyName {
         Select-Object -ExpandProperty Name
     }
 }
+
+function Get-ModuleImportTimes {
+    $Modules = Get-Module -ListAvailable
+    $UserPSModulePath = Get-UserPSModulePath
+    
+    $UserModules = $Modules | 
+    Where-Object ModuleBase -Match ([regex]::Escape($UserPSModulePath))
+
+    $UserModules |
+    Add-Member -MemberType ScriptProperty -Name ImportModuleDuration -force -Value {
+        Measure-command { Import-Module -Force $This.Name }
+    }
+    $SortedByImportTimes = $UserModules | Sort-Object ImportModuleDuration
+    $SortedByImportTimes | select -First 20 -Property Name, ImportModuleDuration    
+}
